@@ -1,0 +1,26 @@
+#form-category button{
+    margin-right: 1.5em;
+}
+
+.category-table{
+
+    margin-top: 1.5em;
+    height: 100%;
+
+}
+
+#icon-header{
+    float: right;
+    font-size: 25px;
+    position: relative;
+    top: -35px;
+}
+
+#table-item-type{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.pannel-body-custom{
+    padding: 15px;
+}

@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "PlutoApp",
+                "projectName": "PlutoApp",
+                "workingDirectory": "c:\\Users\\jedeleon\\Documents\\PrivateWorkspace\\PlutoAppV1\\IdeaProjects\\PlutoApp",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "PlutoApp",
+                "projectName": "PlutoApp",
+                "workingDirectory": "c:\\Users\\jedeleon\\Documents\\PrivateWorkspace\\PlutoAppV1\\IdeaProjects\\PlutoApp",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
