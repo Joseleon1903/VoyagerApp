@@ -1,8 +1,7 @@
-package com.discovery.voyager.aplication.model.dto;
+package com.discovery.voyager.aplication.model.dto.form;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 
 @Component
@@ -10,8 +9,8 @@ import java.io.Serializable;
 public class RegistrationDTO implements Serializable {
 
     private static final long serialVersionUID = 8297240807703876682L;
-    
-	private String username;
+
+    private String username;
     private String password;
     private String confirmPassword;
     private ProfileDTO profile;

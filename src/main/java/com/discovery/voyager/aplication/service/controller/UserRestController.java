@@ -13,10 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserRestController {
+
+    private static Logger log = LogManager.getLogger(UserRestController.class);
+
 
     @Autowired
     private UserServiceImpl userService;
@@ -24,8 +29,11 @@ public class UserRestController {
     @RequestMapping(value="/{id}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<UserDTO> findById(@PathVariable("id") Long id){
+        log.debug("entering method findById");
+        log.debug("Id: "+ id);
         User userEnty = userService.findById(id);
         UserDTO user = new UserDTO(userEnty.getId(),userEnty.getUsername(), userEnty.getPassword());
+        log.debug("UserDTO: "+ user);
         return new ResponseEntity<UserDTO>(user, HttpStatus.OK);
     }
 

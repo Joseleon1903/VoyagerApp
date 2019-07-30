@@ -1,8 +1,7 @@
-package com.discovery.voyager.aplication.model.dto;
+package com.discovery.voyager.aplication.model.dto.form;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 
 @Data
@@ -10,8 +9,8 @@ import java.io.Serializable;
 public class ProfileDTO implements Serializable {
 
     private static final long serialVersionUID = -6459950174350417512L;
-    
-	public String firstName;
+
+    public String firstName;
     public String lastName;
     public String email;
     public String mobilePhone;

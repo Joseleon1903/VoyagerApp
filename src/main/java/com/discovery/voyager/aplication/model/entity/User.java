@@ -2,6 +2,7 @@ package com.discovery.voyager.aplication.model.entity;
 
 import lombok.Data;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -18,10 +19,11 @@ public class User implements Serializable {
     private String password;
     @OneToOne(cascade = {CascadeType.ALL})
     private Profile profile;
+    private String status;
 
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<Role> roles  = new HashSet<>();
 
 
     public User(long id) {

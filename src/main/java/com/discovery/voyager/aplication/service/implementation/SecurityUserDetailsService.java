@@ -2,7 +2,6 @@ package com.discovery.voyager.aplication.service.implementation;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import com.discovery.voyager.aplication.model.entity.Role;
 import com.discovery.voyager.aplication.model.entity.User;
 import com.discovery.voyager.aplication.repository.UserRepository;
@@ -34,4 +33,5 @@ public class SecurityUserDetailsService implements UserDetailsService{
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
 	}
 
+    
 }
