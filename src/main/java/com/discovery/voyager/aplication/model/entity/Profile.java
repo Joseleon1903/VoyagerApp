@@ -1,7 +1,9 @@
 package com.discovery.voyager.aplication.model.entity;
 
 import lombok.Data;
+
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Data
@@ -18,7 +20,8 @@ public class Profile implements Serializable{
     public String lastName;
     public String email;
     public String mobilePhone;
- 
+    @OneToOne
+    public ImagesData image;
 
     public Profile(){ }
 

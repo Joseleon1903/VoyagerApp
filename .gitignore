@@ -23,3 +23,10 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+### maven exclude ###
+/target
+/.mvn
+
+### visual studio code exclude ###
+/.vscode

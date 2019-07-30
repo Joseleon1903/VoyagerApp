@@ -1,5 +1,5 @@
 
-package com.pluto.aplication.config;
+package com.discovery.voyager.aplication.config;
 
 import java.util.Properties;
 

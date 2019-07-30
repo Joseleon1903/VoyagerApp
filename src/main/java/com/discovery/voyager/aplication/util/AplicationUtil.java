@@ -1,4 +1,4 @@
-package com.pluto.aplication.util;
+package com.discovery.voyager.aplication.util;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

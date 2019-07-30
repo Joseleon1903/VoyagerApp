@@ -29,16 +29,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
+                .antMatchers("/profile/register", "/profile/registration").permitAll()
                 .antMatchers("/vendor/**", "/less/**","/data/**", "/dist/**", "/img/**", "/js/**").permitAll()
-                .antMatchers("h2-console/**").permitAll()
+                .antMatchers("/api/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/login")
+                .loginPage("/login").failureForwardUrl("/loginError")
+                .successForwardUrl("/home")
                 .permitAll()
                 .and()
             .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
             .logoutSuccessUrl("/login");
+
+            
             http.csrf().disable();
             http.headers().frameOptions().disable();
     }

@@ -42,8 +42,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
-                   
-                    <form role="form">
+                    <div class="alert alert-danger" role="alert" th:if="${!errorBean.isEmpty()} ">
+                        <p><span th:text="${errorBean}">13 february 2011</span></p>
+                    </div>
+                    <form role="form" th:action="@{/login}"  method="POST">
                         <fieldset>
                             <div class="form-group">
                                 <input class="form-control" placeholder="E-mail"  type="text" name="username" autofocus />
@@ -61,7 +63,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
                             <ul class="pager">
                                 <li class="next">
-                                    <p>If you are not registered <a >Register</a></p>
+                                    <p>If you are not registered <a href="/profile/register">Register</a></p>
                                 </li>
                             </ul>
 

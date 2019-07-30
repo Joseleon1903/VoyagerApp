@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pluto Bootstrap Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link th:href="@{/vendor/metisMenu/metisMenu.min.css}"  rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/dist/css/sb-admin-2.css}"  rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link th:href="@{/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">
+
+       <!-- 	menu de navegación 	header init -->
+       <div th:replace="fragments/header-menu :: header-menu">... </div>
+       <!-- 	menu de navegación 	header end -->
+   
+       <!-- 	menu de navegación 	init -->
+       <div th:replace="fragments/header-nav :: header-nav">...</div>
+       <!-- 	menu de navegación 	end -->
+        
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header" th:text="${profileBean.username}">Profile </h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <div class="row">
+                <div class="row show-grid">
+
+                  <!--  rigt colum   -->
+                    <div class="col-md-9 col-md-push-3" style="padding: 0px; border-left: none;">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h1>Personal information:</h1>
+                            </div>
+                         <div class="panel-body">
+
+                        <form action="#" th:action="@{/profile/update}" th:object="${profileBean}" method="post">
+
+                            <div class="form-group">
+                                <label>First name</label>
+                                <input class="form-control" name="firstName" th:field="*{firstName}" placeholder="First name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Last name</label>
+                                <input class="form-control" name="lastName" th:field="*{lastName}" placeholder="Last name">
+                            </div>
+
+                            <div class="form-group input-group">
+                                <span class="input-group-addon">@</span>
+                                <input class="form-control" name="email" th:field="*{email}" placeholder="Email" type="text">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Mobile phone</label>
+                                <input class="form-control" name="mobilePhone" th:field="*{mobilePhone}" placeholder="Mobile phone">
+                            </div>
+
+                            <button type="submit" class="btn btn-default">Update</button>
+ 
+                        </form>
+
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <!--  left colum   -->
+                    <div class="col-md-3 col-md-pull-9">
+                        <div class="text-center">
+                        <img th:src="${profileBean.profileImageUrl}" class="avatar img-circle" alt="avatar" style="width: 255px; height: 255px;">
+                        <h6>Upload a different photo...</h6>
+
+                        <form action="#" th:action="@{/fileUpload}" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>File input</label>
+                                <input type="file" name="myFile" />
+                            </div>
+
+                            <div class="form-group">
+                             <button type="submit" class="btn btn-success btn-sm">Upload</button>  
+                            </div>
+                       </form>
+                    </div>
+                    </div>
+               
+              </div>
+
+            </div>
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- Bootstrap Core JavaScript -->
+<!-- jQuery -->
+<script th:src="@{/vendor/jquery/jquery.min.js}" ></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script th:src="@{/vendor/metisMenu/metisMenu.min.js}" ></script>
+
+<!-- Custom Theme JavaScript -->
+<script th:src="@{/dist/js/sb-admin-2.js}" ></script>
+
+
+</body>
+</html>
