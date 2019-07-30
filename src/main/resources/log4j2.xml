@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO" name="VoyagerApp" packages="">
+<Configuration status="WARN" name="Neo" packages="">
 
 
     <Appenders>
@@ -8,8 +8,8 @@
         </Console>
 
 
-        <RollingFile name="RollingFile" fileName="logs/voyager.log"
-                     filePattern="logs/voyager-$${date:yyyy-MM}/voyager-%d{MM-dd-yyyy}-%i.log.gz">
+        <RollingFile name="RollingFile" fileName="logs/neo-services.log"
+                     filePattern="logs/neo-services-$${date:yyyy-MM}/neo-services-%d{MM-dd-yyyy}-%i.log.gz">
             <PatternLayout>
                 <Pattern>%d %-5p (%F:%L) [%t] - %m%n</Pattern>
             </PatternLayout>

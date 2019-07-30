@@ -1,8 +1,8 @@
 package com.discovery.voyager.aplication.model.entity;
 
 import javax.persistence.*;
-
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,7 +13,7 @@ public class Role implements Serializable{
     
     private Long id;
     private String name;
-    private Set<User> users;
+    private Set<User> users =new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

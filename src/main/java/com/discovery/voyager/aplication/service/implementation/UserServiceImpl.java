@@ -1,7 +1,6 @@
 package com.discovery.voyager.aplication.service.implementation;
 
 import com.discovery.voyager.aplication.model.entity.User;
-import com.discovery.voyager.aplication.repository.RoleRepository;
 import com.discovery.voyager.aplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,13 +12,6 @@ public class UserServiceImpl {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
-
     public Iterable<User> findAllUsers() {
         return  userRepository.findAll();
     }
@@ -29,7 +21,7 @@ public class UserServiceImpl {
     }
 
     public User createUser(User user) {
-        return saveOnSystem(user);
+        return userRepository.save(user);
     }
 
     public User updateUser(User user) {
@@ -41,12 +33,6 @@ public class UserServiceImpl {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
-    }
-
-    public User saveOnSystem(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-       // user.setRoles(new HashSet<>(roleRepository.findAll()));
-        return userRepository.save(user);
     }
 
 }
