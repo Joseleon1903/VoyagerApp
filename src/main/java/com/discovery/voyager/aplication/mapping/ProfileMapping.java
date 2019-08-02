@@ -12,7 +12,6 @@ public class ProfileMapping{
         entityout.setUsername(user.getUsername());
         entityout.setFirstName(user.getProfile().getFirstName());
         entityout.setLastName(user.getProfile().getLastName());
-        entityout.setMobilePhone(user.getProfile().getMobilePhone());
         if(user.getProfile().getImage() != null){
             entityout.setProfileImageUrl(user.getProfile().getImage().getFileViewUri());
         }

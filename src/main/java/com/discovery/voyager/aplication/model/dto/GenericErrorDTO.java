@@ -18,7 +18,7 @@ public class GenericErrorDTO implements Serializable{
     private static final long serialVersionUID = -1093132142235886293L;
     
     private String errorDetail = "";
-    private List<String> fieldError= new ArrayList<>();
+    private List<String> fieldError = new ArrayList<>();
 
     public GenericErrorDTO() {
     }

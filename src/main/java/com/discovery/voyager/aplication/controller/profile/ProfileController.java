@@ -58,7 +58,6 @@ public class ProfileController {
       usuarioUpdate.getProfile().setFirstName(user.getFirstName());
       usuarioUpdate.getProfile().setLastName(user.getLastName());
       usuarioUpdate.getProfile().setEmail(user.getEmail());
-      usuarioUpdate.getProfile().setMobilePhone(user.getMobilePhone());
       userService.updateUser(usuarioUpdate);
 
       // enviando email usuario actualizado con exito.
