@@ -1,16 +1,9 @@
 package com.discovery.voyager.aplication.mock;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import com.discovery.voyager.aplication.model.entity.ErrorException;
-import com.discovery.voyager.aplication.model.entity.ImagesData;
-import com.discovery.voyager.aplication.model.entity.Profile;
-import com.discovery.voyager.aplication.model.entity.Role;
-import com.discovery.voyager.aplication.model.entity.User;
+import com.discovery.voyager.aplication.model.entity.*;
 import com.discovery.voyager.aplication.repository.ImagesDataRepository;
 import com.discovery.voyager.aplication.repository.RoleRepository;
+import com.discovery.voyager.aplication.service.implementation.EmailTemplateService;
 import com.discovery.voyager.aplication.service.implementation.ErrorExceptionService;
 import com.discovery.voyager.aplication.service.implementation.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +11,10 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by jleon on 6/5/2018.
@@ -40,6 +37,10 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private ErrorExceptionService errorExceptionService;
 
+    @Autowired
+    private EmailTemplateService emailTemplateService;
+
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent){
         initUserData();
@@ -48,6 +49,8 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
     public void initUserData(){
 
         ImagesData data =ImageMockDataBase();
+
+        CatalogEmailTemplateInit();
 
         creationRoleCatalog();
 
@@ -64,7 +67,6 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         profile.setFirstName("Jose");
         profile.setLastName("De Leon");
         profile.setEmail("joseleon@gmail.com");
-        profile.setMobilePhone("809-445-7563");
         user.setProfile(profile);
         user.getProfile().setImage(data);
 
@@ -158,7 +160,19 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
 
         errorE = new ErrorException();
         errorE.setCode(800);
-        errorE.setDescription("there are required data not provided");
+        errorE.setDescription("There are required data not provided");
+        errorE.setStatus(true);
+        listError.add(errorE);
+
+        errorE = new ErrorException();
+        errorE.setCode(801);
+        errorE.setDescription("The password format does not represent a format accepted by the system");
+        errorE.setStatus(true);
+        listError.add(errorE);
+
+        errorE = new ErrorException();
+        errorE.setCode(802);
+        errorE.setDescription("The email format does not represent a format accepted by the system");
         errorE.setStatus(true);
         listError.add(errorE);
 
@@ -168,5 +182,22 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
             errorExceptionService.save(var);
         }
     }
+
+    public void CatalogEmailTemplateInit(){
+        System.out.println("---------- Inizializando data Email --------------" );
+        EmailTemplate  eTemplate = new EmailTemplate();
+        eTemplate.setCode("Email_new_registration");
+        eTemplate.setHeader("Welcome thanks for your registration");
+        eTemplate.setContent("The welcome email one of the worlds leading aplication, "
+                +"is quite discreet. This type of email isn’t usually recommended, as there is very little hook to the message.");
+        emailTemplateService.save(eTemplate);
+
+        eTemplate = new EmailTemplate();
+        eTemplate.setCode("Update_user_profile");
+        eTemplate.setHeader("Welcome thanks for update your profile");
+        eTemplate.setContent("Hello, we thank you for updating your profile data.");
+        emailTemplateService.save(eTemplate);
+    }
+
 
 }

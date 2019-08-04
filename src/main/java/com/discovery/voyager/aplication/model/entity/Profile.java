@@ -19,18 +19,16 @@ public class Profile implements Serializable{
     public String firstName;
     public String lastName;
     public String email;
-    public String mobilePhone;
     @OneToOne
     public ImagesData image;
 
     public Profile(){ }
 
-    public Profile(long id,String firstName,String lastName,String email,String mobilePhone){
+    public Profile(long id,String firstName,String lastName,String email ){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.mobilePhone = mobilePhone;
     }
     
 }

@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import com.discovery.voyager.aplication.config.FileStorageProperties;
-import com.discovery.voyager.aplication.exception.InternalAplicationException;
+import com.discovery.voyager.aplication.exception.InternalApplicationException;
 import com.discovery.voyager.aplication.model.entity.ImagesData;
 import com.discovery.voyager.aplication.repository.ImagesDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class ImageServiceImpl{
         try {
             Files.createDirectories(this.fileStorageLocation);
         } catch (Exception ex) {
-            throw new InternalAplicationException("Could not create the directory where the uploaded files will be stored.", ex);
+            throw new InternalApplicationException("Could not create the directory where the uploaded files will be stored.", ex);
         }
     }
 
@@ -49,7 +49,7 @@ public class ImageServiceImpl{
         try {
             // Check if the file's name contains invalid characters
             if(fileName.contains("..")) {
-                throw new InternalAplicationException("Sorry! Filename contains invalid path sequence " + fileName);
+                throw new InternalApplicationException("Sorry! Filename contains invalid path sequence " + fileName);
             }
 
             if(entity ==null){
@@ -79,7 +79,7 @@ public class ImageServiceImpl{
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             imagesDataRepository.save(entity);
         } catch (IOException ex) {
-            throw new InternalAplicationException("Could not store file " + fileName + ". Please try again!", ex);
+            throw new InternalApplicationException("Could not store file " + fileName + ". Please try again!", ex);
         }
         return entity;
     }
@@ -90,7 +90,7 @@ public class ImageServiceImpl{
         if (resource.exists()) {
             return resource;
         } else {
-            throw new InternalAplicationException("File not found " + fileName);
+            throw new InternalApplicationException("File not found " + fileName);
         }
     }
 
