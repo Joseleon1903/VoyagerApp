@@ -1,6 +1,7 @@
 package com.discovery.voyager.aplication.validator;
 
 import com.discovery.voyager.aplication.constant.ConstantAplication;
+import com.discovery.voyager.aplication.exception.PasswordInvallidPatternException;
 import com.discovery.voyager.aplication.exception.RequiredFieldException;
 import com.discovery.voyager.aplication.model.dto.form.RegistrationDTO;
 import com.discovery.voyager.aplication.model.entity.OtpEmailConfirmation;
@@ -12,9 +13,9 @@ import com.discovery.voyager.aplication.util.PasswordUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class RegistrationDtoAssistence {
+public class RegistrationDtoAssistant {
 
-    private static Logger log = LogManager.getLogger(RegistrationDtoAssistence.class);
+    private static Logger log = LogManager.getLogger(RegistrationDtoAssistant.class);
 
     public static void validationRequiredField(RegistrationDTO registration) throws RequiredFieldException {
         log.debug("entering method validationRequiredField");
@@ -23,20 +24,29 @@ public class RegistrationDtoAssistence {
                 AplicationUtil.isStringNullOrEmpty(registration.getConfirmPassword())) {
             throw new RequiredFieldException();
         }
-        if (!AplicationUtil.isStringNullOrEmpty(registration.getProfile().getFirstName()) ||
-                AplicationUtil.isStringNullOrEmpty(registration.getProfile().getLastName()) ||
-                AplicationUtil.isStringNullOrEmpty(registration.getProfile().getEmail())) {
+        if (!AplicationUtil.isStringNullOrEmpty(registration.getFirstName()) ||
+                AplicationUtil.isStringNullOrEmpty(registration.getLastName()) ||
+                AplicationUtil.isStringNullOrEmpty(registration.getEmail())) {
             throw new RequiredFieldException();
+        }
+    }
+
+    public static void validationIntegrityPasswordField(RegistrationDTO registration) throws PasswordInvallidPatternException{
+
+//        if (!AplicationUtil.patternCorrect(registration.getEmail(), ConstantAplication.EMAIL_REGEX)) {
+//            throw new InvalidEmailException();
+//        }
+        if (registration.getPassword().matches(ConstantAplication.PASSWORD_REGEX) || registration.getConfirmPassword().matches(ConstantAplication.PASSWORD_REGEX)) {
+            throw new PasswordInvallidPatternException();
         }
     }
 
     public static User convertToEntity(RegistrationDTO registration, Role role, String pass) {
         User newUser =  new User();
         Profile newProfile = new Profile();
-        newProfile.setFirstName(registration.getProfile().getFirstName());
-        newProfile.setLastName(registration.getProfile().getLastName());
-        newProfile.setMobilePhone(registration.getProfile().getMobilePhone());
-        newProfile.setEmail(registration.getProfile().getEmail());
+        newProfile.setFirstName(registration.getFirstName());
+        newProfile.setLastName(registration.getLastName());
+        newProfile.setEmail(registration.getEmail());
         newUser.setPassword(pass);
         newUser.setUsername(registration.getUsername());
         newUser.setProfile(newProfile);

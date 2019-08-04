@@ -30,3 +30,4 @@
 
 ### visual studio code exclude ###
 /.vscode
+/logs
