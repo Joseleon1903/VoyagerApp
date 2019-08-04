@@ -59,8 +59,8 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         System.out.println("inicializando data de usuario");
         User user = new User();
         user.setId(1);
-        user.setUsername("ADMIN");
-        String pass = bCryptPasswordEncoder.encode("ADMIN123");
+        user.setUsername("admin");
+        String pass = bCryptPasswordEncoder.encode("admin123");
         user.setPassword(pass);
         Profile profile = new Profile();
         profile.setId(1);
@@ -181,7 +181,6 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         for (ErrorException var : listError) {
             errorExceptionService.save(var);
         }
-
     }
 
     public void CatalogEmailTemplateInit(){
