@@ -22,7 +22,6 @@ public class UserRestController {
 
     private static Logger log = LogManager.getLogger(UserRestController.class);
 
-
     @Autowired
     private UserServiceImpl userService;
 

@@ -3,10 +3,12 @@ package com.discovery.voyager.aplication.validator;
 import com.discovery.voyager.aplication.constant.ConstantAplication;
 import com.discovery.voyager.aplication.exception.RequiredFieldException;
 import com.discovery.voyager.aplication.model.dto.form.RegistrationDTO;
+import com.discovery.voyager.aplication.model.entity.OtpEmailConfirmation;
 import com.discovery.voyager.aplication.model.entity.Profile;
 import com.discovery.voyager.aplication.model.entity.Role;
 import com.discovery.voyager.aplication.model.entity.User;
 import com.discovery.voyager.aplication.util.AplicationUtil;
+import com.discovery.voyager.aplication.util.PasswordUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,7 +42,18 @@ public class RegistrationDtoAssistence {
         newUser.setProfile(newProfile);
         newUser.getRoles().add(role);
         newUser.setStatus(ConstantAplication.STATUS_PA);
+        newUser.setOtpEmailConfirmation(generateOtpEmail());
         return newUser;
     }
+
+    public static OtpEmailConfirmation generateOtpEmail(){
+        OtpEmailConfirmation output = new OtpEmailConfirmation();
+        output.setOtpSending(PasswordUtil.generatePassword(6));
+        output.setOtpValidated(false);
+        return output;
+    }
+
+
+
 
 }

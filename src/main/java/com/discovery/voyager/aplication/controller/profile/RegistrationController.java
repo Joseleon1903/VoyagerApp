@@ -94,20 +94,19 @@ public class RegistrationController {
             return "redirect:profile/register";
         }
 
-        //enviando email registration 
+        Role rol =  roleRepository.findByName(ConstantAplication.ROLE_USER);
+        String encodPass = bCryptPasswordEncoder.encode(registerData.getPassword());
+        User newUser = RegistrationDtoAssistence.convertToEntity(registerData, rol, encodPass);
+        newUser =userService.createUser(newUser);
+
+        //enviando email registration
         EmailTemplate template = emailTemplateService.findByCode(ConstantAplication.REGISTRATION_EMAIL_CODE);
 
         EmailDTO email = new EmailDTO();
         email.setHeader("Welcome "+registerData.getUsername());
         email.setDestinationEmail(registerData.getProfile().getEmail());
         email.setContent(template.getContent());
-
         emailServiceImpl.sendEmailTo(email);
-
-        Role rol =  roleRepository.findByName(ConstantAplication.ROLE_USER);
-        String encodPass = bCryptPasswordEncoder.encode(registerData.getPassword());
-        User newUser = RegistrationDtoAssistence.convertToEntity(registerData, rol, encodPass);
-        newUser =userService.createUser(newUser);
         System.out.println("usuario registrdo: "+ newUser);
         return "profile/register/RegistrationSuccess";
     }
