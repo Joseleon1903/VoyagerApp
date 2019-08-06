@@ -13,6 +13,4 @@ public class ThymeleafConfig{
         messageSource.setBasename("Messages");
         return messageSource;
     }
-
-
 }

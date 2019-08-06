@@ -8,8 +8,8 @@ public interface UserService {
 
     User updateUser(User user);
 
-    User findByUsername(String username);
+    User findByUsernameAndStatusActive(String username);
 
-    User registration(User user);
+    User findByUsername(String username);
 
 }

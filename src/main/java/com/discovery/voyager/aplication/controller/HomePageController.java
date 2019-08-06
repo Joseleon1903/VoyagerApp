@@ -16,14 +16,9 @@ public class HomePageController {
 
     private static Logger log = LogManager.getLogger(HomePageController.class);
 
-
     @RequestMapping({ "/home", "/"})
-    public String loginPage(Model model){
-        log.debug("entering in method loginPage");
-
-        if(true){
-            throw new InternalApplicationException();
-        }
+    public String homePage(Model model){
+        log.debug("entering in method homePage");
         return "dashboard/HomePage";
     }
 

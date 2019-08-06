@@ -31,4 +31,15 @@ public class RegistrationDTO implements Serializable {
 
     public RegistrationDTO(){}
 
+    @Override
+    public String toString() {
+        return "RegistrationDTO{" +
+                "username='" + username + '\'' +
+                ", password=' ********" +
+                ", confirmPassword= ********'" +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

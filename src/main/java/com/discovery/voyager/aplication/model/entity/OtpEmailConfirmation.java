@@ -1,9 +1,9 @@
 package com.discovery.voyager.aplication.model.entity;
 
 import lombok.Data;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by jose on 8/4/2019.
@@ -14,9 +14,12 @@ import javax.persistence.Table;
 public class OtpEmailConfirmation {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private boolean otpEmailSend;
     private String otpSending;
     private boolean otpValidated;
+    private Date otpSendingDate;
 
     public OtpEmailConfirmation(long id){
         this.id = id;

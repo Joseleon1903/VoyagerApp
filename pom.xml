@@ -117,6 +117,17 @@
          <version>2.5</version>
        </dependency>
 
+		<!--
+		Attention: Be sure nothing pulls in an old dependency with groupId
+		"freemarker" (without the "org."), because then you will end up with
+		two freemarker.jar-s and unpredictable behavior!
+		-->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.28</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -124,6 +135,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludeDevtools>false</excludeDevtools>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

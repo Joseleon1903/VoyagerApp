@@ -1,5 +1,6 @@
 package com.discovery.voyager.aplication.mock;
 
+import com.discovery.voyager.aplication.constant.ConstantAplication;
 import com.discovery.voyager.aplication.model.entity.*;
 import com.discovery.voyager.aplication.repository.ImagesDataRepository;
 import com.discovery.voyager.aplication.repository.RoleRepository;
@@ -62,6 +63,7 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         user.setUsername("admin");
         String pass = bCryptPasswordEncoder.encode("admin123");
         user.setPassword(pass);
+        user.setStatus(ConstantAplication.STATUS_A);
         Profile profile = new Profile();
         profile.setId(1);
         profile.setFirstName("Jose");
@@ -173,6 +175,12 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         errorE = new ErrorException();
         errorE.setCode(802);
         errorE.setDescription("The email format does not represent a format accepted by the system");
+        errorE.setStatus(true);
+        listError.add(errorE);
+
+        errorE = new ErrorException();
+        errorE.setCode(504);
+        errorE.setDescription("Otp code does not match");
         errorE.setStatus(true);
         listError.add(errorE);
 

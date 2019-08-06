@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Voyager Bootstrap Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link th:href="@{/vendor/metisMenu/metisMenu.min.css}"  rel="stylesheet">
+    <!-- Custom CSS -->
+    <link th:href="@{/dist/css/sb-admin-2.css}"  rel="stylesheet">
+    <link th:href="@{/dist/css/pluto-registration-style.css}"  rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link th:href="@{/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrapper">
+
+    <!-- 	menu de navegación 	header init -->
+    <div th:replace="fragments/header-menu :: header-menu">... </div>
+    <!-- 	menu de navegación 	header end -->
+
+    <!-- /#page-registration form  -->
+    <div id="form-registration">
+        <div class="col-lg-12">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <h1 th:text="#{aplication.name}"></h1>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form role="form" action="#" th:action="@{/profile/register/validation/otp(otpForm =${otpField})}" th:object="${otpField}"  method="post">
+
+                                <div class="form-group">
+                                    <label for="validationCode">Otp validation code</label>
+                                    <input class="form-control" id="validationCode" name="validationCode" type="password" th:field="${otpField.otpTextField}"  >
+                                    <div class="alert alert-danger" role="alert" th:if="!${#fields.errors('otpTextField').isEmpty()}" style="margin-top: 0.5em">
+                                        <p><span th:each="err : ${#fields.errors('otpTextField')}" th:text="${err}" ></span></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="display: none">
+                                    <label for="username">Otp username</label>
+                                    <input class="form-control" id="username" name="username" type="text" th:field="${otpField.username}"  >
+                                </div>
+
+                                <button type="submit" class="btn btn-success">Validate</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- Bootstrap Core JavaScript -->
+<!-- jQuery -->
+<script th:src="@{/vendor/jquery/jquery.min.js}" ></script>
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script th:src="@{/vendor/metisMenu/metisMenu.min.js}" ></script>
+<!-- Custom Theme JavaScript -->
+<script th:src="@{/dist/js/sb-admin-2.js}" ></script>
+
+
+</body>
+</html>

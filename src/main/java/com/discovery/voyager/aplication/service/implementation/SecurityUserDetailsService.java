@@ -2,6 +2,8 @@ package com.discovery.voyager.aplication.service.implementation;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.discovery.voyager.aplication.constant.ConstantAplication;
 import com.discovery.voyager.aplication.model.entity.Role;
 import com.discovery.voyager.aplication.model.entity.User;
 import com.discovery.voyager.aplication.repository.UserRepository;
@@ -24,7 +26,7 @@ public class SecurityUserDetailsService implements UserDetailsService{
     @Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsernameAndStatus(username, ConstantAplication.STATUS_A);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()){

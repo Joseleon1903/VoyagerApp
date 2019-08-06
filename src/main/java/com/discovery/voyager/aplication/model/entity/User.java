@@ -2,6 +2,7 @@ package com.discovery.voyager.aplication.model.entity;
 
 import lombok.Data;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -20,6 +21,8 @@ public class User implements Serializable {
     @OneToOne(cascade = {CascadeType.ALL})
     private Profile profile;
     private String status;
+    private Date creationDate;
+    private Date lastLoginDate;
 
     @OneToOne(cascade = {CascadeType.ALL})
     private OtpEmailConfirmation otpEmailConfirmation;

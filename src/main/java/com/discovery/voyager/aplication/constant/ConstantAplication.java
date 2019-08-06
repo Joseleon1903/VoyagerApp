@@ -19,6 +19,8 @@ public interface ConstantAplication{
     //erroro code 
     long INVALID_USER_ERROR_CODE = 501;
     long INVALID_MATCH_PASSWORD_ERROR_CODE = 502;
+    long INVALID_MATCH_OTP_ERROR_CODE = 504;
+
     long DUPLICATE_USERNAME_ERROR_CODE = 503;
 
     long REQUIRED_FIELD_ERROR_CODE = 800;

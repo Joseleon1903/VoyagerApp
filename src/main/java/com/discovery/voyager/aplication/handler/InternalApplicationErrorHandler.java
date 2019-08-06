@@ -16,8 +16,6 @@ public class InternalApplicationErrorHandler {
      */
     @ExceptionHandler({InternalApplicationException.class, NullPointerException.class})
     public String handleAplicationError(Throwable throwable, HttpServletRequest request, HttpServletResponse response)  {
-        int statusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
-        String mesage = "error{\"error\":  \"in aplication\"}";
         return "error/GeneralErrorPage";
     }
 

@@ -44,7 +44,7 @@ public class ProfileController {
    @RequestMapping(value = "/profile", method = RequestMethod.GET)
    public String DisplayUserProfile(Model model, Principal principal) {
       System.out.println("entering DisplayUserProfile");
-      User user = userService.findByUsername(principal.getName());
+      User user = userService.findByUsernameAndStatusActive(principal.getName());
       System.out.println("user : " + user);
       profileFormData = ProfileMapping.convertFromEntity(user);
       model.addAttribute("profileBean", profileFormData);
@@ -54,7 +54,7 @@ public class ProfileController {
    @RequestMapping(value = "/profile/update", method = RequestMethod.POST)
    public String updateUserForm(@ModelAttribute(value = "user") ProfileFormData user, Model model, Principal pincipal) {
       System.out.println("entering updateUserForm");
-      User usuarioUpdate = userService.findByUsername(pincipal.getName());
+      User usuarioUpdate = userService.findByUsernameAndStatusActive(pincipal.getName());
       usuarioUpdate.getProfile().setFirstName(user.getFirstName());
       usuarioUpdate.getProfile().setLastName(user.getLastName());
       usuarioUpdate.getProfile().setEmail(user.getEmail());
@@ -67,7 +67,7 @@ public class ProfileController {
       email.setHeader(template.getHeader());
       email.setDestinationEmail(usuarioUpdate.getProfile().getEmail());
       email.setContent(template.getContent());
-      emailServiceImpl.sendEmailTo(email);
+      //emailServiceImpl.sendEmailTo(email);
       profileFormData = ProfileMapping.convertFromEntity(usuarioUpdate);
       model.addAttribute("profileBean", profileFormData);
       model.addAttribute("username", usuarioUpdate.getUsername());
@@ -85,7 +85,7 @@ public class ProfileController {
          System.out.println("error update image");
       }
       if (image != null) {
-         User usuarioUpdate = userService.findByUsername(profileFormData.getUsername());
+         User usuarioUpdate = userService.findByUsernameAndStatusActive(profileFormData.getUsername());
          usuarioUpdate.getProfile().setImage(image);
          usuarioUpdate = userService.updateUser(usuarioUpdate);
          profileFormData = ProfileMapping.convertFromEntity(usuarioUpdate);

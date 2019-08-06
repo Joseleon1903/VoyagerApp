@@ -13,6 +13,8 @@ import com.discovery.voyager.aplication.util.PasswordUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Date;
+
 public class RegistrationDtoAssistant {
 
     private static Logger log = LogManager.getLogger(RegistrationDtoAssistant.class);
@@ -41,7 +43,7 @@ public class RegistrationDtoAssistant {
         }
     }
 
-    public static User convertToEntity(RegistrationDTO registration, Role role, String pass) {
+    public static User convertToEntity(RegistrationDTO registration, Role role, String pass, String sentOtp, boolean emailSend) {
         User newUser =  new User();
         Profile newProfile = new Profile();
         newProfile.setFirstName(registration.getFirstName());
@@ -52,14 +54,17 @@ public class RegistrationDtoAssistant {
         newUser.setProfile(newProfile);
         newUser.getRoles().add(role);
         newUser.setStatus(ConstantAplication.STATUS_PA);
-        newUser.setOtpEmailConfirmation(generateOtpEmail());
+        newUser.setOtpEmailConfirmation(generateOtpEmail(sentOtp, emailSend));
+        newUser.setCreationDate(new Date());
         return newUser;
     }
 
-    public static OtpEmailConfirmation generateOtpEmail(){
+    public static OtpEmailConfirmation generateOtpEmail(String otp, boolean sendEmail){
         OtpEmailConfirmation output = new OtpEmailConfirmation();
-        output.setOtpSending(PasswordUtil.generatePassword(6));
+        output.setOtpEmailSend(sendEmail);
+        output.setOtpSending(otp);
         output.setOtpValidated(false);
+        output.setOtpSendingDate(new Date());
         return output;
     }
 

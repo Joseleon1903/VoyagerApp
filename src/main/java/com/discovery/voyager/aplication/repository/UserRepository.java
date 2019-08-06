@@ -6,7 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
-   @Query("select u from User u where u.username like ?1")
+   User findByUsernameAndStatus(String username, String status);
+
    User findByUsername(String username);
 
 }

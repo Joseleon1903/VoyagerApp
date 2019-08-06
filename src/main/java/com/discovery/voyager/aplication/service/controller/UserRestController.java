@@ -55,7 +55,7 @@ public class UserRestController {
     @RequestMapping(value="/findByUsername/{username}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<User> findByUsername(@PathVariable("username") String username){
-        User userEnty = userService.findByUsername(username);
+        User userEnty = userService.findByUsernameAndStatusActive(username);
         return new ResponseEntity<User>(userEnty, HttpStatus.ACCEPTED);
     }
 
