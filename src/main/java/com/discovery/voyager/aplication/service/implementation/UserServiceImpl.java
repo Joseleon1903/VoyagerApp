@@ -1,12 +1,10 @@
 package com.discovery.voyager.aplication.service.implementation;
 
-import com.discovery.voyager.aplication.constant.ConstantAplication;
+import com.discovery.voyager.aplication.constant.ConstantApplication;
 import com.discovery.voyager.aplication.model.entity.User;
 import com.discovery.voyager.aplication.repository.UserRepository;
-import com.discovery.voyager.aplication.service.interfaces.EmailService;
 import com.discovery.voyager.aplication.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,7 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public User findByUsernameAndStatusActive(String username) {
-        return userRepository.findByUsernameAndStatus(username, ConstantAplication.STATUS_A);
+        return userRepository.findByUsernameAndStatus(username, ConstantApplication.STATUS_A);
     }
 
     @Override

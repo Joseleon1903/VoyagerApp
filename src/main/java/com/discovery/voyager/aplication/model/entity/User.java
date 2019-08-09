@@ -27,9 +27,14 @@ public class User implements Serializable {
     @OneToOne(cascade = {CascadeType.ALL})
     private OtpEmailConfirmation otpEmailConfirmation;
 
-    @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles  = new HashSet<>();
+    @ManyToMany(mappedBy = "userManagements")
+    private Set<Project> projectsMg;
+
+    @ManyToMany(mappedBy = "members")
+    private Set<Project> projectsMembers;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    private Role role;
 
 
     public User(long id) {

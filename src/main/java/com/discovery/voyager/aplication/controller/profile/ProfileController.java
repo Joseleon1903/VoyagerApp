@@ -2,7 +2,7 @@ package com.discovery.voyager.aplication.controller.profile;
 
 import java.io.IOException;
 import java.security.Principal;
-import com.discovery.voyager.aplication.constant.ConstantAplication;
+import com.discovery.voyager.aplication.constant.ConstantApplication;
 import com.discovery.voyager.aplication.mapping.ProfileMapping;
 import com.discovery.voyager.aplication.model.dto.EmailDTO;
 import com.discovery.voyager.aplication.model.dto.form.ProfileFormData;
@@ -61,7 +61,7 @@ public class ProfileController {
       userService.updateUser(usuarioUpdate);
 
       // enviando email usuario actualizado con exito.
-      EmailTemplate template = emailTemplateService.findByCode(ConstantAplication.UPDATE_USER_PROFILE);
+      EmailTemplate template = emailTemplateService.findByCode(ConstantApplication.UPDATE_USER_PROFILE);
 
       EmailDTO email = new EmailDTO();
       email.setHeader(template.getHeader());

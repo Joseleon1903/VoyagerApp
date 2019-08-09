@@ -1,10 +1,8 @@
 package com.discovery.voyager.aplication.handler;
 
 import com.discovery.voyager.aplication.exception.InternalApplicationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,10 +16,5 @@ public class InternalApplicationErrorHandler {
     public String handleAplicationError(Throwable throwable, HttpServletRequest request, HttpServletResponse response)  {
         return "error/GeneralErrorPage";
     }
-
-
-
-
-
 
 }

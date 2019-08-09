@@ -1,6 +1,6 @@
 package com.discovery.voyager.aplication.util;
 
-import com.discovery.voyager.aplication.constant.ConstantAplication;
+import com.discovery.voyager.aplication.constant.ConstantApplication;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -41,7 +41,7 @@ public class AplicationUtil {
 
     public static boolean patternCorrect(String text, final String regex) {
 
-        if(ConstantAplication.EMAIL_REGEX.equalsIgnoreCase(regex)){
+        if(ConstantApplication.EMAIL_REGEX.equalsIgnoreCase(regex)){
             text = text.toLowerCase();
         }
         Pattern pattern = Pattern.compile(regex);

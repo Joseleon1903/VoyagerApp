@@ -1,5 +1,6 @@
 package com.discovery.voyager.aplication.config;
 
+import com.discovery.voyager.aplication.constant.ConstantApplication;
 import com.discovery.voyager.aplication.model.entity.User;
 import com.discovery.voyager.aplication.service.interfaces.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -23,7 +24,6 @@ public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-
     @Autowired
     private UserService userService;
 
@@ -35,7 +35,21 @@ public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         User user = userService.findByUsername(username);
         user.setLastLoginDate(new Date());
         userService.updateUser(user);
-        redirectStrategy.sendRedirect(request, response, "/home");
+        String roleName = user.getRole().getName();
+        String redirectPath = "/home";
+        switch (roleName){
+            case ConstantApplication.ROLE_MANAGEMENT:
+                redirectPath = ConstantApplication.ROLE_MANAGEMENT_PREFIX + "/page/dashboard";
+                break;
+            case ConstantApplication.ROLE_USER:
+                redirectPath = ConstantApplication.ROLE_USER_PREFIX + "/page/dashboard";
+                break;
+            case ConstantApplication.ROLE_ADMIN:
+                redirectPath = ConstantApplication.ROLE_ADMIN_PREFIX + "/page/dashboard";
+                break;
+            default: redirectPath = ConstantApplication.ROLE_GUEST_PREFIX + "/page/dashboard";
+        }
+        redirectStrategy.sendRedirect(request, response, redirectPath);
     }
 
 

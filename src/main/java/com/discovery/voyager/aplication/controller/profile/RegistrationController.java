@@ -1,6 +1,6 @@
 package com.discovery.voyager.aplication.controller.profile;
 
-import com.discovery.voyager.aplication.constant.ConstantAplication;
+import com.discovery.voyager.aplication.constant.ConstantApplication;
 import com.discovery.voyager.aplication.exception.PasswordInvallidPatternException;
 import com.discovery.voyager.aplication.model.dto.form.OtpFormDto;
 import com.discovery.voyager.aplication.model.dto.form.RegistrationDTO;
@@ -79,7 +79,7 @@ public class RegistrationController {
         try{
             RegistrationDtoAssistant.validationIntegrityPasswordField(registerData);
         } catch (PasswordInvallidPatternException e) {
-            String error = errorExceptionService.findByCode(ConstantAplication.PASSWORD_INVALID_PATTERN_ERROR_CODE).getDescription();
+            String error = errorExceptionService.findByCode(ConstantApplication.PASSWORD_INVALID_PATTERN_ERROR_CODE).getDescription();
             model.addAttribute("registrationBean", registerData);
             bindingResult.rejectValue("password", "error.registrationBean", error);
             return "profile/register/RegistrationUser";
@@ -87,7 +87,7 @@ public class RegistrationController {
 
         //validando passsword
         if(!registerData.getPassword().equals(registerData.getConfirmPassword())){
-            String error = errorExceptionService.findByCode(ConstantAplication.INVALID_MATCH_PASSWORD_ERROR_CODE).getDescription();
+            String error = errorExceptionService.findByCode(ConstantApplication.INVALID_MATCH_PASSWORD_ERROR_CODE).getDescription();
             bindingResult.rejectValue("password", "error.registrationBean", error);
             model.addAttribute("registrationBean", registerData);
             return "profile/register/RegistrationUser";
@@ -96,7 +96,7 @@ public class RegistrationController {
         //validando nombre usuario
         User validationUser = userService.findByUsernameAndStatusActive(registerData.getUsername());
         if(validationUser != null){
-            String error = errorExceptionService.findByCode(ConstantAplication.DUPLICATE_USERNAME_ERROR_CODE).getDescription();
+            String error = errorExceptionService.findByCode(ConstantApplication.DUPLICATE_USERNAME_ERROR_CODE).getDescription();
             bindingResult.rejectValue("username", "error.registrationBean", error);
             model.addAttribute("registrationBean", registerData);
             return "profile/register/RegistrationUser";
@@ -117,7 +117,7 @@ public class RegistrationController {
         }
         log.debug("sending email process end... ");
         log.debug("creation user to save ");
-        Role rol =  roleRepository.findByName(ConstantAplication.ROLE_USER);
+        Role rol =  roleRepository.findByName(ConstantApplication.ROLE_USER);
         String encodPass = bCryptPasswordEncoder.encode(registerData.getPassword());
         User newUser = RegistrationDtoAssistant.convertToEntity(registerData, rol, encodPass,otp, sendEmail);
         newUser = userService.createUser(newUser);
@@ -151,12 +151,12 @@ public class RegistrationController {
         log.debug("validate otp.. ");
         if(otpForm.getOtpTextField().equals(userFound.getOtpEmailConfirmation().getOtpSending())){
             log.debug("otp is valid redirect to login and update user.. ");
-            userFound.setStatus(ConstantAplication.STATUS_A);
+            userFound.setStatus(ConstantApplication.STATUS_A);
             userFound.getOtpEmailConfirmation().setOtpValidated(true);
             userService.updateUser(userFound);
             return "redirect:/login";
         }
-        String error = errorExceptionService.findByCode(ConstantAplication.INVALID_MATCH_OTP_ERROR_CODE).getDescription();
+        String error = errorExceptionService.findByCode(ConstantApplication.INVALID_MATCH_OTP_ERROR_CODE).getDescription();
         bindingResult.rejectValue("otpTextField", "error.otpField", error);
         return "profile/register/RegistrationOtpValidation";
     }

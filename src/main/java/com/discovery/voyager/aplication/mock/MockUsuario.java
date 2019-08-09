@@ -1,6 +1,6 @@
 package com.discovery.voyager.aplication.mock;
 
-import com.discovery.voyager.aplication.constant.ConstantAplication;
+import com.discovery.voyager.aplication.constant.ConstantApplication;
 import com.discovery.voyager.aplication.model.entity.*;
 import com.discovery.voyager.aplication.repository.ImagesDataRepository;
 import com.discovery.voyager.aplication.repository.RoleRepository;
@@ -63,7 +63,7 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         user.setUsername("admin");
         String pass = bCryptPasswordEncoder.encode("admin123");
         user.setPassword(pass);
-        user.setStatus(ConstantAplication.STATUS_A);
+        user.setStatus(ConstantApplication.STATUS_A);
         Profile profile = new Profile();
         profile.setId(1);
         profile.setFirstName("Jose");
@@ -71,17 +71,13 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         profile.setEmail("joseleon@gmail.com");
         user.setProfile(profile);
         user.getProfile().setImage(data);
-
-        Role rol =roleRepository.findById(new Long(1)).get();
-      
-        user.getRoles().add(rol);
-
+        Role rol =roleRepository.findById(new Long(4)).get();
+        user.setRole(rol);
         User userC = userService.createUser(user);
         System.out.println("Usuario: "+ userC );
         System.out.println("Terminando inicializando data de usuario");
 
     }
-
    
     public ImagesData ImageMockDataBase(){
         System.out.println("---------- ImageMockDataBase initialization --------------" );
@@ -97,43 +93,51 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         return entity;
     }
 
-    public ImagesData ImageMockItemDataBase(){
-        System.out.println("---------- ImageMockItemDataBase initialization --------------" );
-        String fileName= "wall-box.jpg";
+    public ImagesData ImageMockItemDataBase() {
+        System.out.println("---------- ImageMockItemDataBase initialization --------------");
+        String fileName = "wall-box.jpg";
         ImagesData entity = new ImagesData();
         entity.setName(fileName);
-        entity.setFileDownloadUri("http://localhost:8085/api/file/downloadFile/"+ fileName);
+        entity.setFileDownloadUri("http://localhost:8085/api/file/downloadFile/" + fileName);
         entity.setFileType("png");
         entity.setCreationDate(new Date());
         entity.setUpdateDate(new Date());
-        entity.setFileViewUri("http://localhost:8085/api/file/view/image/"+fileName );
-        entity =imagesDataRepository.save(entity);
+        entity.setFileViewUri("http://localhost:8085/api/file/view/image/" + fileName);
+        entity = imagesDataRepository.save(entity);
         return entity;
     }
 
-
-
     public void creationRoleCatalog(){
         System.out.println("entering method creationRoleCatalog");
+
+        List<Role> listR = new ArrayList<>();
+
         Role rol = new Role();
         rol.setId(new  Long(1));
         rol.setName("ROLE_ADMIN");
         System.out.println("role: "+ rol);
+        listR.add(rol);
 
-        Role rol1 = new Role();
-        rol1.setId(new  Long(2));
-        rol1.setName("ROLE_USER");
-        System.out.println("role: "+ rol1);
+        rol = new Role();
+        rol.setId(new  Long(2));
+        rol.setName("ROLE_USER");
+        System.out.println("role: "+ rol);
+        listR.add(rol);
 
-        Role rol2 = new Role();
-        rol2.setId(new  Long(3));
-        rol2.setName("ROLE_GUEST");
-        System.out.println("role: "+ rol2);
+        rol = new Role();
+        rol.setId(new  Long(3));
+        rol.setName("ROLE_GUEST");
+        System.out.println("role: "+ rol);
+        listR.add(rol);
 
-        roleRepository.save(rol);
-        roleRepository.save(rol1);
-        roleRepository.save(rol2);
-        
+        rol = new Role();
+        rol.setId(new  Long(4));
+        rol.setName("ROLE_MANAGEMENT");
+        listR.add(rol);
+        System.out.println("role: "+ rol);
+        for (Role r: listR) {
+            roleRepository.save(r);
+        }
     }
 
     public void catalogErrorInit(){
@@ -206,6 +210,4 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         eTemplate.setContent("Hello, we thank you for updating your profile data.");
         emailTemplateService.save(eTemplate);
     }
-
-
 }

@@ -1,6 +1,6 @@
 package com.discovery.voyager.aplication.validator;
 
-import com.discovery.voyager.aplication.constant.ConstantAplication;
+import com.discovery.voyager.aplication.constant.ConstantApplication;
 import com.discovery.voyager.aplication.exception.PasswordInvallidPatternException;
 import com.discovery.voyager.aplication.exception.RequiredFieldException;
 import com.discovery.voyager.aplication.model.dto.form.RegistrationDTO;
@@ -9,10 +9,8 @@ import com.discovery.voyager.aplication.model.entity.Profile;
 import com.discovery.voyager.aplication.model.entity.Role;
 import com.discovery.voyager.aplication.model.entity.User;
 import com.discovery.voyager.aplication.util.AplicationUtil;
-import com.discovery.voyager.aplication.util.PasswordUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.Date;
 
 public class RegistrationDtoAssistant {
@@ -34,11 +32,7 @@ public class RegistrationDtoAssistant {
     }
 
     public static void validationIntegrityPasswordField(RegistrationDTO registration) throws PasswordInvallidPatternException{
-
-//        if (!AplicationUtil.patternCorrect(registration.getEmail(), ConstantAplication.EMAIL_REGEX)) {
-//            throw new InvalidEmailException();
-//        }
-        if (registration.getPassword().matches(ConstantAplication.PASSWORD_REGEX) || registration.getConfirmPassword().matches(ConstantAplication.PASSWORD_REGEX)) {
+        if (registration.getPassword().matches(ConstantApplication.PASSWORD_REGEX) || registration.getConfirmPassword().matches(ConstantApplication.PASSWORD_REGEX)) {
             throw new PasswordInvallidPatternException();
         }
     }
@@ -52,8 +46,8 @@ public class RegistrationDtoAssistant {
         newUser.setPassword(pass);
         newUser.setUsername(registration.getUsername());
         newUser.setProfile(newProfile);
-        newUser.getRoles().add(role);
-        newUser.setStatus(ConstantAplication.STATUS_PA);
+        newUser.setRole(role);
+        newUser.setStatus(ConstantApplication.STATUS_PA);
         newUser.setOtpEmailConfirmation(generateOtpEmail(sentOtp, emailSend));
         newUser.setCreationDate(new Date());
         return newUser;
@@ -67,8 +61,4 @@ public class RegistrationDtoAssistant {
         output.setOtpSendingDate(new Date());
         return output;
     }
-
-
-
-
 }

@@ -13,7 +13,6 @@ public class Role implements Serializable{
     
     private Long id;
     private String name;
-    private Set<User> users =new HashSet<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,13 +32,4 @@ public class Role implements Serializable{
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "roles")
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-    
 }
