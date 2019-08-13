@@ -10,7 +10,6 @@ public class ProfileDTO implements Serializable {
 
     private static final long serialVersionUID = -6459950174350417512L;
 
-
     public ProfileDTO(){}
 
 }

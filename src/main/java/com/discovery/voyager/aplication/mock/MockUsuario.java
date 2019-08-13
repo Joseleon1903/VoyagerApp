@@ -57,6 +57,8 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
 
         catalogErrorInit();
 
+        usuarioMock();
+
         System.out.println("inicializando data de usuario");
         User user = new User();
         user.setId(1);
@@ -210,4 +212,61 @@ public class MockUsuario implements ApplicationListener<ContextRefreshedEvent> {
         eTemplate.setContent("Hello, we thank you for updating your profile data.");
         emailTemplateService.save(eTemplate);
     }
+
+    public void usuarioMock(){
+        System.out.println("inicializando data de usuario");
+        User user = new User();
+        user.setId(2);
+        user.setUsername("UsuarioPrueba");
+        String pass = bCryptPasswordEncoder.encode("admin123");
+        user.setPassword(pass);
+        user.setStatus(ConstantApplication.STATUS_A);
+        Profile profile = new Profile();
+        profile.setId(5);
+        profile.setFirstName("Jose");
+        profile.setLastName("De Leon");
+        profile.setEmail("joseleon@gmail.com");
+        user.setProfile(profile);
+        Role rol =roleRepository.findById(new Long(2)).get();
+        user.setRole(rol);
+        User userC = userService.createUser(user);
+
+        System.out.println("inicializando data de usuario");
+        user = new User();
+        user.setId(3);
+        user.setUsername("PruebaProfile");
+        String pass2 = bCryptPasswordEncoder.encode("admin123");
+        user.setPassword(pass2);
+        user.setStatus(ConstantApplication.STATUS_A);
+        profile = new Profile();
+        profile.setId(1);
+        profile.setFirstName("Jose");
+        profile.setLastName("De Leon");
+        profile.setEmail("joseleon@gmail.com");
+        user.setProfile(profile);
+        rol =roleRepository.findById(new Long(2)).get();
+        user.setRole(rol);
+        userC = userService.createUser(user);
+
+        System.out.println("inicializando data de usuario");
+        user = new User();
+        user.setId(4);
+        user.setUsername("ExampleMock");
+        String pass3 = bCryptPasswordEncoder.encode("admin123");
+        user.setPassword(pass3);
+        user.setStatus(ConstantApplication.STATUS_A);
+        profile = new Profile();
+        profile.setId(1);
+        profile.setFirstName("Jose");
+        profile.setLastName("De Leon");
+        profile.setEmail("joseleon@gmail.com");
+        user.setProfile(profile);
+        rol =roleRepository.findById(new Long(2)).get();
+        user.setRole(rol);
+        userC = userService.createUser(user);
+
+
+    }
+
+
 }

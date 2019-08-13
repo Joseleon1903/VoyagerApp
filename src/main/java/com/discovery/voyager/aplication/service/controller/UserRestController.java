@@ -59,4 +59,5 @@ public class UserRestController {
         return new ResponseEntity<User>(userEnty, HttpStatus.ACCEPTED);
     }
 
+
 }

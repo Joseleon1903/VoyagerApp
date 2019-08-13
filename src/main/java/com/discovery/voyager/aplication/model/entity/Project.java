@@ -16,6 +16,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private String name;
     private String title;
     private String description;
     private boolean isOpen;
