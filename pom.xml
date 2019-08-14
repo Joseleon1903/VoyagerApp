@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>VoyagerApp</name>
-	<description>This project aims to make an application for personal proyect management.</description>
+	<description>This project aims to make an application for personal project management.</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
