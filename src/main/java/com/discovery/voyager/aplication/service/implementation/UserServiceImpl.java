@@ -7,6 +7,9 @@ import com.discovery.voyager.aplication.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -39,6 +42,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public List<String> findListUsername(String texto) {
+        List<String> outList = new ArrayList<>();
+        texto = "%"+ texto+"%";
+        userRepository.findListUsernameByParam(texto).forEach( element ->{
+            outList.add(element.getUsername());
+        });
+        return outList;
     }
 
 }

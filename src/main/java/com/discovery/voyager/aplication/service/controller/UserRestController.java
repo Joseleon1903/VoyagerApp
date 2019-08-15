@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserRestController {
@@ -59,5 +62,11 @@ public class UserRestController {
         return new ResponseEntity<User>(userEnty, HttpStatus.ACCEPTED);
     }
 
+    @RequestMapping(value="/find/list/username/{username}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity findListUsername(@PathVariable("username") String username){
+        username = "%"+username+"%";
+        return ResponseEntity.ok(userService.findListUsername(username));
+    }
 
 }
